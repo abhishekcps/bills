@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Serum-BMR</title>
+  <base href="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- <link rel="stylesheet" href="assets/css/jquery-ui.css"> -->
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  </style>
+  <script src="./assets/jsuites.js"></script>
+  <!-- <script src="assets/js/jquery-ui.js"></script> -->
+  <!-- <script>
+    $( function() {
+
+    $('.datepicker').datepicker({
+                  autoclose: true,
+          dateFormat: 'dd-mm-yy',
+                  todayHighlight: true,
+                  onSelect: function (dateText) {debugger
+                      $(this).change();
+                  }
+              });
+    } );
+    </script> -->
+    <!-- <link rel="stylesheet" href="../node_modules/material-icons/css/material-icons.css"> -->
+    <!-- <link rel="stylesheet" href="../node_modules/material-icons/iconfont/material-icons.css"> -->
+    <!-- <link rel="stylesheet" href="../node_modules/material-icons/iconfont/material-icons.scss">
+    <link rel="stylesheet" href="../node_modules/material-icons/css/material-icons.scss">
+   -->
+    
+
+    <!-- <link rel="stylesheet" href="../node_modules/material-design-icons/iconfont/material-icons.css"> -->
+
+    <!-- <link rel="stylesheet" href="../node_modules/material-design-icons-iconfont/src/material-design-icons.scss"> -->
+    <!-- <link rel="stylesheet" href="../node_modules/material-design-icons-iconfont/dist/material-design-icons.css"> -->
+
+ <link rel="stylesheet" href="./assets/icon.css"  />
+ <link rel="stylesheet" href="./assets/font-awesome.min.css">
+ <link rel="stylesheet" href="./assets/css.css"  />
+ <link rel="stylesheet" href="../assets/bootstrap/css/demo_2/style.css" />
+ <!-- <link rel="stylesheet" href="assets/css/jquery-ui.css"> -->
+ <link type="text/css" href="./assets/jquery-ui.css" rel="stylesheet" />
+ <link type="text/css" href="./assets/dataTables.jqueryui.min.css" rel="stylesheet" />
+ 
+ 
+
+
+</head>
+<body>
+
+  <app-root></app-root>
+
+
+<script src="./assets/jquery.min.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/paging.js"></script> 
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('.tbl_sm').paging({limit:5});
+  });
+</script>
+
+<!-- <script>
+  $(document).ready(
+    function(){
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled',false); 
+                } 
+            }
+            );
+    });
+</script>  -->
+
+<script>
+  if (performance.navigation.type == 1) {
+    location.href='/';
+  } 
+  var validate = function(e,DecimalPlace) {debugger
+ var t = e.value;
+ e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."),DecimalPlace)) : t;
+}
+   </script>
+
+<!--<script src="https://jsuites.net/v4/jsuites.js"></script>-->
+  
+  <script>
+    function SignatureClick(SignId,BtnId) {debugger
+     var Flag = 0;
+     var Authlevel = localStorage.getItem('Authlevel').split(",")
+
+     Authlevel.forEach((value, index) => {
+      if(value == SignId.charAt(0)){
+         Flag = 1;
+         if(SignId.indexOf("Sg") == 1){
+          document.getElementById(SignId).innerHTML= localStorage.getItem("userId")
+         }
+         if(SignId.indexOf("dt")== 3){
+          document.getElementById(SignId).innerHTML= localStorage.getItem("userId") +" "+new Date().toLocaleDateString('en-GB');
+         }
+         if(SignId.indexOf("tm")== 5){
+          document.getElementById(SignId).innerHTML= localStorage.getItem("userId") +" "+new Date().toLocaleString('en-GB', { hour12: false });
+         }
+        //document.getElementById(SignId).innerHTML= localStorage.getItem("userId") +" "+new Date().toLocaleString('en-GB', { hour12: false });
+        document.getElementById(BtnId).disabled = true;
+      }
+
+     });
+
+     if(Flag == 0){
+       alert('You dont have any permission');
+       document.getElementById(BtnId).disabled = true;
+
+     }
+    }
+
+    </script>
+
+
+
+
+<!-- Abhishek6Aug -->
+
+
+<script>
+
+  function CaptureImgClick(TagId,CanVasId,BtnId) {
+  
+    
+    $('label[id="'+CanVasId+'"]').each(function () {
+        debugger
+        var id = $(this).attr('id');
+        var className = $(this).attr('class');
+        var width = '400';
+        var height = '300';
+        canvas = $(document.createElement('canvas')).attr('id', id).attr('width', width).attr('height', height);
+        $(this).replaceWith(canvas);
+      });
+    var canvas = document.getElementById(CanVasId);
+    var context = canvas.getContext('2d');
+    var video = document.getElementById(TagId);
+    context.drawImage(video, 0, 0, 400, 300);
+  
+    document.getElementById(BtnId).disabled = true;
+  
+  
+    document.getElementById(TagId).remove();
+  
+    var passdetails = {
+          'tag': TagId,
+          'PO_No': localStorage.getItem("PO_No"),
+          'page': localStorage.getItem("Page"),
+          "imageData":canvas.toDataURL().split(',')[1],
+          'userId': localStorage.getItem("userId"),
+          'Type': '1'
+        }
+        const todo = {
+          "data": {
+            "content": btoa(JSON.stringify(passdetails)),
+            "encryptCode": ""
+          },
+          "globalInfo": {
+            "latitude": "2.32.34.00",
+            "langitude": "12.232.12",
+            "deviceNo": "Hp",
+            "userName": localStorage.getItem("username"),
+            "requestTime": new Date(),
+            "interfaceCode": "I041",
+            "UserCategory": localStorage.getItem("userCategory"),
+            "userId": localStorage.getItem("userId")
+          },
+          "returnStateInfo": {
+            "returnMessage": "",
+            "returnCode": ""
+          }
+        };
+  
+  
+        $.ajax({
+        type: "POST",
+        url: 'https://192.168.160.94:444/api/GetInfo',
+        data: JSON.stringify(todo),
+        dataType: 'json',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'token': localStorage.getItem('token')
+          },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {debugger
+            // alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+       
+          },
+        success: function (result) {debugger
+            alert("Data Uploaded");
+            
+        }
+    });
+   
+  }
+  
+    function PhotoClick(PhotoClickId,OpenCamId) {debugger
+      alert('Opening Camera');
+  
+      $('label[id="'+ PhotoClickId +'"]').each(function () {
+        debugger
+        var id = $(this).attr('id');
+        var className = $(this).attr('class');
+        video = $(document.createElement('video')).attr('id', id);
+        $(this).replaceWith(video);
+      });
+  
+     
+      var video = document.getElementById(PhotoClickId);
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video:  {width: { ideal: 400  }, height: { ideal: 300  } ,facingMode: {exact : 'environment'} } }).then(function (stream) {
+          video.srcObject = stream;
+          video.play();
+        });
+      }
+  
+      document.getElementById(OpenCamId).disabled = true;
+    }
+  </script> 
+  
+
+<!-- 
+<script>
+  
+function PhotoClick(PhotoClickId,OpenCamId) {debugger
+    alert('Open Camera btn called');
+
+    $('label[id="'+ PhotoClickId +'"]').each(function () {
+      debugger
+      var id = $(this).attr('id');
+      var className = $(this).attr('class');
+      video = $(document.createElement('video')).attr('id', id);
+      $(this).replaceWith(video);
+    });
+
+   
+    var video = document.getElementById(PhotoClickId);
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video:  {width: { ideal: 400  }, height: { ideal: 300  } ,facingMode: {exact : 'environment'} }}).then(function (stream) {
+        video.srcObject = stream;
+        video.play();
+      });
+    }
+    video.pause();
+  video.src = "";
+  localstream.getTracks()[0].stop();
+
+    document.getElementById(OpenCamId).disabled = true;
+
+    localStream.getVideoTracks()[0].stop();
+    video.src = '';
+
+    stream.getTracks().forEach(function(track) {
+  track.stop();
+
+});
+    //   var stream = video.srcObject;
+  // var tracks = stream.getTracks();
+
+  // for (var i = 0; i < tracks.length; i++) {
+  //   var track = tracks[i];
+  //   track.stop();
+  // }
+
+  // video.srcObject = null;
+  // video.pause();
+
+//     stopVideo =()=>
+// {
+//         this.video.pause();
+//         this.video.src = "";
+//         this.video.srcObject = null;
+
+//          // As per new API stop all streams
+//         if (this.localStream)
+//           this.localStream.getTracks().forEach(track => track.stop());
+// }
+
+  }
+ 
+
+  
+function CaptureImgClick(TagId,CanVasId,BtnId) {
+  alert('Capture btn called');
+  // localStream.getVideoTracks()[0].stop();
+  //   video.src = '';
+  
+  $('label[id="'+CanVasId+'"]').each(function () {
+      debugger
+      var id = $(this).attr('id');
+      var className = $(this).attr('class');
+      var width = '400';
+      var height = '300 ';
+      canvas = $(document.createElement('canvas')).attr('id', id).attr('width', width).attr('height', height);
+      $(this).replaceWith(canvas);
+    });
+  var canvas = document.getElementById(CanVasId);
+  var context = canvas.getContext('2d');
+  var video = document.getElementById(TagId);
+  context.drawImage(video, 0, 0, 400, 300 );
+  document.getElementById(TagId).remove();
+
+  var passdetails = {
+        'tag': TagId,
+        'PO_No': localStorage.getItem("PO_No"),
+        'page': localStorage.getItem("Page"),
+        "imageData":canvas.toDataURL().split(',')[1],
+        'userId': localStorage.getItem("userId"),
+        'Type': '1'
+      }
+      const todo = {
+        "data": {
+          "content": btoa(JSON.stringify(passdetails)),
+          "encryptCode": ""
+        },
+        "globalInfo": {
+          "latitude": "2.32.34.00",
+          "langitude": "12.232.12",
+          "deviceNo": "Hp",
+          "userName": localStorage.getItem("username"),
+          "requestTime": new Date(),
+          "interfaceCode": "I041",
+          "UserCategory": localStorage.getItem("userCategory"),
+          "userId": localStorage.getItem("userId")
+        },
+        "returnStateInfo": {
+          "returnMessage": "",
+          "returnCode": ""
+        }
+      };
+
+      document.getElementById(BtnId).disabled = true;
+
+      $.ajax({
+      type: "POST",
+      url: 'https://192.168.160.94:444/api/GetInfo',
+      data: JSON.stringify(todo),
+      dataType: 'json',
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'token': localStorage.getItem('token')
+        },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {debugger
+          // alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+     
+        },
+      success: function (result) {debugger
+          alert("Data Uploaded");
+          
+      }
+  });
+  video.pause();
+  video.src = "";
+  localstream.getTracks()[0].stop();
+  
+  // $('video').trigger('pause');
+
+  // video[0].pause();
+  // video.currentTime = 0;
+
+//   if (navigator.getUserMedia) {
+//     navigator.getUserMedia(constraints, function (stream) {
+//         videoEl.src = stream;
+//         videoEl.play();
+//         document.getElementById('close').addEventListener('click', function () {
+//             stopStream(stream);
+//         });
+//     }, errBack);
+
+
+localStream.getVideoTracks()[0].stop();
+    video.src = '';
+// }
+
+    stream.getTracks().forEach(function(track) {
+  track.stop();
+});
+}
+
+  
+</script>  -->
+
+<script>
+  var css = '@page { size: landscape; }',
+      head = document.head || document.getElementsByTagName('head')[0],
+      style = document.createElement('style');
+
+    style.type = 'text/css';
+    style.media = 'print';
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+</script>
+
+<!-- Abhishek6AugEnd -->
+
+<script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills-es2015.js" type="module"></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule defer></script><script src="scripts.js" defer></script><script src="vendor-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule defer></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule defer></script></body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script> -->
+
+
+
+
+</html>
