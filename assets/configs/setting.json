@@ -1,0 +1,5 @@
+{
+    "API_URL": "http://localhost:57573/",
+    "LOGO_PATH": "https://www.seruminstitute.com/images/retina/serum-logo.png",
+    "ws": true
+}
